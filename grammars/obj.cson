@@ -6,15 +6,23 @@ patterns: [{ include: "#main" }]
 
 repository:
 	
-	# Commonly-used patterns
+	# Top-level patterns
 	main:
 		patterns: [
 			{include: "#comment"}
-			{include: "#escapes"}
+			{include: "#line-continuation"}
 			{include: "#general"}
 			{include: "#vertex"}
 			{include: "#freeform"}
-			{include: "#float"}
+			{include: "#number"}
+		]
+	
+	# Generic patterns that should be picked up anywhere
+	global:
+		patterns: [
+			{include: "#comment"}
+			{include: "#number"}
+			{include: "#line-continuation"}
 		]
 	
 	
@@ -25,16 +33,16 @@ repository:
 		end: "$"
 		beginCaptures:
 			1: name: "punctuation.definition.comment.wavefront.obj"
+
 	
-	
-	# Escaped line-break
-	escapes:
+	# Continuous newline
+	"line-continuation":
 		name: "constant.character.escape.newline.wavefront.obj"
 		match: "\\\\\n"
 	
 	
-	# Data units
-	float:
+	# Numeric values
+	number:
 		name: "constant.numeric.wavefront.obj"
 		match: "(?<=[\\s,]|^)(-)?(\\d+)(?:(\\.)(\\d+))?\\b"
 		captures:
@@ -50,9 +58,7 @@ repository:
 		begin: "\\G"
 		end: "(?<!\\\\)$"
 		patterns: [
-			{include: "#comment"}
-			{include: "#escapes"}
-			{include: "#float"}
+			{include: "#global"}
 			{name: "variable.language.substituted.wavefront.obj", match: "\\$[1-9]+"}
 		]
 		
@@ -63,28 +69,28 @@ repository:
 		name: "meta.vector.xyzw.wavefront.obj"
 		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?"
 		captures:
-			1: name: "entity.x.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			2: name: "entity.y.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			3: name: "entity.z.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			4: name: "entity.w.weight.wavefront.obj",      patterns: [include: "#float"]
+			1: name: "entity.x.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			2: name: "entity.y.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			3: name: "entity.z.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			4: name: "entity.w.weight.wavefront.obj",      patterns: [include: "#number"]
 	
 	# UVW vector
 	uvw:
 		name: "meta.vector.uvw.wavefront.obj"
 		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)"
 		captures:
-			1: name: "entity.u.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			2: name: "entity.v.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			3: name: "entity.w.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			1: name: "entity.u.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			2: name: "entity.v.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			3: name: "entity.w.coordinate.wavefront.obj",  patterns: [include: "#number"]
 	
 	# Normals vector
 	ijk:
 		name: "meta.vector.ijk.wavefront.obj"
 		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)"
 		captures:
-			1: name: "entity.i.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			2: name: "entity.j.coordinate.wavefront.obj",  patterns: [include: "#float"]
-			3: name: "entity.k.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			1: name: "entity.i.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			2: name: "entity.j.coordinate.wavefront.obj",  patterns: [include: "#number"]
+			3: name: "entity.k.coordinate.wavefront.obj",  patterns: [include: "#number"]
 	
 	
 	
@@ -136,9 +142,8 @@ repository:
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
-				{include: "#escapes"}
 				{include: "#xyzw"}
-				{include: "#float"}
+				{include: "#global"}
 			]
 		},{
 			
@@ -149,9 +154,8 @@ repository:
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
-				{include: "#escapes"}
 				{include: "#uvw"}
-				{include: "#float"}
+				{include: "#global"}
 			]
 		},{
 			
@@ -162,9 +166,8 @@ repository:
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
-				{include: "#escapes"}
 				{include: "#ijk"}
-				{include: "#float"}
+				{include: "#global"}
 			]
 		},{
 			
@@ -175,9 +178,8 @@ repository:
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
-				{include: "#escapes"}
 				{include: "#uvw"}
-				{include: "#float"}
+				{include: "#global"}
 			]
 		}]
 
@@ -212,11 +214,7 @@ repository:
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 				2: name: "entity.type.wavefront.obj"
-			patterns: [
-				{include: "#comment"}
-				{include: "#escapes"}
-				{include: "#float"}
-			]
+			patterns: [include: "#global"]
 		},{
 			
 			# step: Specify step-size for curves/surfaces that use a basis matrix
