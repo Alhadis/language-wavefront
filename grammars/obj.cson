@@ -29,10 +29,10 @@ repository:
 	# Comment-lines
 	comment:
 		name: "comment.line.number-sign.wavefront.obj"
-		begin: "^\\s*(#)"
-		end: "$"
+		begin: "#"
+		end:   "$"
 		beginCaptures:
-			1: name: "punctuation.definition.comment.wavefront.obj"
+			0: name: "punctuation.definition.comment.wavefront.obj"
 
 	
 	# Continuous newline
@@ -67,7 +67,7 @@ repository:
 	# XYZ[W] vector
 	xyzw:
 		name: "meta.vector.xyzw.wavefront.obj"
-		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?"
+		match: "\\G\\s*(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)(?:\\s+(?!#)(\\S+)(?<!#))?"
 		captures:
 			1: name: "entity.x.coordinate.wavefront.obj",  patterns: [include: "#number"]
 			2: name: "entity.y.coordinate.wavefront.obj",  patterns: [include: "#number"]
@@ -77,7 +77,7 @@ repository:
 	# UVW vector
 	uvw:
 		name: "meta.vector.uvw.wavefront.obj"
-		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)"
+		match: "\\G\\s*(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)"
 		captures:
 			1: name: "entity.u.coordinate.wavefront.obj",  patterns: [include: "#number"]
 			2: name: "entity.v.coordinate.wavefront.obj",  patterns: [include: "#number"]
@@ -86,7 +86,7 @@ repository:
 	# Normals vector
 	ijk:
 		name: "meta.vector.ijk.wavefront.obj"
-		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)"
+		match: "\\G\\s*(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)"
 		captures:
 			1: name: "entity.i.coordinate.wavefront.obj",  patterns: [include: "#number"]
 			2: name: "entity.j.coordinate.wavefront.obj",  patterns: [include: "#number"]
@@ -100,7 +100,7 @@ repository:
 			
 			# call: Inject the contents of another .obj/.mod at this line
 			name: "meta.function-call.$1.wavefront.obj"
-			begin: "^\\s*(call)(?:\\s+(\\S+)?)?"
+			begin: "^\\s*(call)(?:\\s+(?!#)(\\S+)?)?"
 			end: "$"
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
@@ -137,8 +137,8 @@ repository:
 			
 			# v: Geometric vertex
 			name: "meta.vertex.geometric.wavefront.obj"
-			begin: "^\\s*(v)(?=\\s|$)"
-			end:   "$"
+			begin: "^\\s*(v)(?=\\s|$|#)"
+			end:   "(?=$|#)"
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
