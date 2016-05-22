@@ -14,6 +14,7 @@ repository:
 			{include: "#general"}
 			{include: "#vertex"}
 			{include: "#elements"}
+			{include: "#attributes"}
 			{include: "#freeform"}
 			{include: "#body-statements"}
 			{include: "#number"}
@@ -230,8 +231,8 @@ repository:
 		}]
 
 	
-	# Free-form geometry
-	freeform:
+	# Free-form attribute statements
+	attributes:
 		patterns: [{
 			
 			# cstype: Describe the type of a curve or surface
