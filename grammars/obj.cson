@@ -13,6 +13,7 @@ repository:
 			{include: "#escapes"}
 			{include: "#general"}
 			{include: "#vertex"}
+			{include: "#freeform"}
 			{include: "#float"}
 		]
 	
@@ -178,4 +179,51 @@ repository:
 				{include: "#uvw"}
 				{include: "#float"}
 			]
+		}]
+
+	
+	# Free-form geometry
+	freeform:
+		patterns: [{
+			
+			# cstype: Describe the type of a curve or surface
+			name: "meta.free-form.attribute.type.wavefront.obj"
+			match: "^\\s*(cstype)(?:\\s+(rat(?=\\s|$))?\\s*(?:(bmatrix|bezier|bspline|cardinal|taylor))?)?(?=\\s|$)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "entity.rational-form.wavefront.obj"
+				3: name: "entity.value.wavefront.obj"
+		},{
+			
+			# deg: Set the polynomial degree for curves/surfaces
+			name: "meta.free-form.attribute.polynomial-degree.wavefront.obj"
+			match: "^\\s*(deg)(?:\\s+(\\d+)(?=\\s|$))?(?:\\s+(\\d+))?(?=\\s|$)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.numeric.u-degree.wavefront.obj"
+				3: name: "constant.numeric.v-degree.wavefront.obj"
+		},{
+			
+			# bmat: Set the basis matrices used for basis matrix curves/surfaces
+			name: "meta.free-form.attribute.$2.basis-matrix.wavefront.obj"
+			begin: "^\\s*(bmat)(?:\\s+(u|v)(?=\\s|$)\\s*)?"
+			end:   "(?<!\\\\)$|(?=#)"
+			contentName: "meta.matrix.wavefront.obj"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "entity.type.wavefront.obj"
+			patterns: [
+				{include: "#comment"}
+				{include: "#escapes"}
+				{include: "#float"}
+			]
+		},{
+			
+			# step: Specify step-size for curves/surfaces that use a basis matrix
+			name: "meta.free-form.attribute.step-size.wavefront.obj"
+			match: "^\\s*(step)(?:\\s+(\\d+))?(?:\\s+(\\d+))?(?=\\s|$)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.numeric.u-size.wavefront.obj"
+				3: name: "constant.numeric.v-size.wavefront.obj"
 		}]
