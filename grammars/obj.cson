@@ -3,14 +3,18 @@ scopeName: "source.wavefront.obj"
 fileTypes: ["obj"]
 patterns: [{ include: "#main" }]
 
+
 repository:
 	
 	# Commonly-used patterns
 	main:
 		patterns: [
-			include: "#comment"
+			{include: "#comment"}
+			{include: "#geometric-vertex"}
 		]
 	
+	
+	# Comment-lines
 	comment:
 		name: "comment.line.number-sign.wavefront.obj"
 		begin: "^\\s*(#)"
@@ -19,3 +23,45 @@ repository:
 			1: name: "punctuation.definition.comment.wavefront.obj"
 	
 	
+	# Escaped line-break
+	escapes:
+		name: "constant.character.escape.newline.wavefront.obj"
+		match: "\\\\$\\n?"
+	
+	
+	# Data units
+	float:
+		name: "constant.numeric.wavefront.obj"
+		match: "(?<=[\\s,]|^)(-)?(\\d+)(?:(\\.)(\\d+))?\\b"
+		captures:
+			1: name: "keyword.operator.arithmetic.wavefront.obj"
+			2: name: "leading.decimal"
+			3: name: "decimal.separator"
+			4: name: "trailing.decimal"
+	
+	
+	# 3 or 4-point vector: [x, y, z, w?]
+	"vector-xyzw":
+		name: "meta.vector.xyzw.wavefront.obj"
+		match: "\\G\\s+*(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?"
+		captures:
+			1: name: "entity.x.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			2: name: "entity.y.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			3: name: "entity.z.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			4: name: "entity.w.weight.wavefront.obj",      patterns: [include: "#float"]
+	
+	
+	# Geometric vertex
+	"geometric-vertex":
+		name: "meta.vertex.geometric.wavefront.obj"
+		begin: "^\\s*(v)(?=\\s|$)"
+		end: "$"
+		beginCaptures:
+			1: name: "keyword.function.wavefront.obj"
+		patterns: [
+			{include: "#escapes"}
+			{include: "#vector-xyzw"}
+			{include: "#float"}
+		]
+	
+			
