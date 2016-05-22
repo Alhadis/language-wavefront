@@ -316,6 +316,20 @@ repository:
 			]
 		},{
 			
+			# curv: Simple curve
+			name: "meta.free-form.element.curve.wavefront.obj"
+			begin: "^\\s*(curv)\\s+([-\\d.]+)\\s+([-\\d.]+)"
+			end: "(?<!\\\\)$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "entity.value.start-value.wavefront.obj", patterns: [include: "#number"]
+				3: name: "entity.value.end-value.wavefront.obj",   patterns: [include: "#number"]
+			patterns: [
+				{include: "#vertref-single"}
+				{include: "#global"}
+			]
+		},{
+			
 			# curv2: 2D-curve
 			name: "meta.free-form.element.curve-2d.wavefront.obj"
 			begin: "^\\s*(curv2)(?:\\s|$|#)"
@@ -330,7 +344,7 @@ repository:
 			
 			# surf: Surface
 			name: "meta.free-form.element.surface.wavefront.obj"
-			begin: "^\\s*(surf)\\s+(-?\\d+)\\s+(-?\\d+)\\s+(-?\\d+)\\s+(-?\\d+)"
+			begin: "^\\s*(surf)\\s+([-\\d.]+)\\s+([-\\d.]+)\\s+([-\\d.]+)\\s+([-\\d.]+)"
 			end: "(?<!\\\\)$"
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
