@@ -96,6 +96,14 @@ repository:
 	# Vertex references
 	vertref:
 		patterns: [
+			{include: "#vertref-triple"}
+			{include: "#vertref-double"}
+			{include: "#vertref-single"}
+		]
+	
+	# Single reference only
+	"vertref-single":
+		patterns: [
 			{match: "-\\d+", name: "constant.numeric.vertex-reference.relative.wavefront.obj"}
 			{match:  "\\d+", name: "constant.numeric.vertex-reference.absolute.wavefront.obj"}
 		]
@@ -103,7 +111,7 @@ repository:
 	# Vertex reference with an optional double reference: v1/v1, v2/v2, v3/v3
 	"vertref-double":
 		name: "meta.vertex-reference.double.wavefront.obj"
-		match: "(-?\\d+)(\\/)(-?\\d+)"
+		match: "(?<=\\s)(-?\\d+)(\\/)(-?\\d+)(?=\\s|$)"
 		captures:
 			1: name: "meta.first.wavefront.obj",   patterns: [include: "#vertref"]
 			2: name: "punctuation.separator.slash.wavefront.obj"
@@ -112,7 +120,7 @@ repository:
 	# Vertex reference with two optional double references (v1/v1/v1, v1//v1)
 	"vertref-triple":
 		name: "meta.vertex-reference.triple.wavefront.obj"
-		match: "(-?\\d+)(\\/)(-?\\d+)?(\\/)(-?\\d+)"
+		match: "(?<=\\s)(-?\\d+)(\\/)(-?\\d+)?(\\/)(-?\\d+)(?=\\s|$)"
 		captures:
 			1: name: "meta.first.wavefront.obj",   patterns: [include: "#vertref"]
 			2: name: "punctuation.separator.slash.wavefront.obj"
@@ -265,7 +273,7 @@ repository:
 			beginCaptures:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
-				{include: "#vertref"}
+				{include: "#vertref-single"}
 				{include: "#global"}
 			]
 		},{
@@ -278,7 +286,7 @@ repository:
 				1: name: "keyword.function.$1.wavefront.obj"
 			patterns: [
 				{include: "#vertref-double"}
-				{include: "#vertref"}
+				{include: "#vertref-single"}
 				{include: "#global"}
 			]
 		},{
@@ -291,8 +299,34 @@ repository:
 				1: name: "keyword.function.$1.wavefront.obj"
 				2: name: "invalid.deprecated.wavefront.obj"
 			patterns: [
-				{include: "#vertref-triple"}
-				{include: "#vertref-double"}
+				{include: "#vertref"}
+				{include: "#global"}
+			]
+		},{
+			
+			# curv2: 2D-curve
+			name: "meta.free-form.element.curve-2d.wavefront.obj"
+			begin: "^\\s*(curv2)(?:\\s|$|#)"
+			end: "(?<!\\\\)$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [
+				{include: "#vertref-single"}
+				{include: "#global"}
+			]
+		},{
+			
+			# surf: Surface
+			name: "meta.free-form.element.surface.wavefront.obj"
+			begin: "^\\s*(surf)\\s+(-?\\d+)\\s+(-?\\d+)\\s+(-?\\d+)\\s+(-?\\d+)"
+			end: "(?<!\\\\)$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "entity.value.u-start.wavefront.obj",  patterns: [include: "#number"]
+				3: name: "entity.value.u-end.wavefront.obj",    patterns: [include: "#number"]
+				4: name: "entity.value.v-start.wavefront.obj",  patterns: [include: "#number"]
+				5: name: "entity.value.v-end.wavefront.obj",    patterns: [include: "#number"]
+			patterns: [
 				{include: "#vertref"}
 				{include: "#global"}
 			]
