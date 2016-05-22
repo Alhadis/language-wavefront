@@ -1,0 +1,11 @@
+# Points
+p  2  4  6  8  # Absolute
+p -2 -4 -6 -8  # Relative
+
+# Lines
+l  -2/2 5/-2 2 2/2
+
+# Faces
+f 2/-2/2
+fo 2/-2/2
+f -2/-2/-1
