@@ -1,0 +1,21 @@
+name: "Wavefront Object"
+scopeName: "source.wavefront.obj"
+fileTypes: ["obj"]
+patterns: [{ include: "#main" }]
+
+repository:
+	
+	# Commonly-used patterns
+	main:
+		patterns: [
+			include: "#comment"
+		]
+	
+	comment:
+		name: "comment.line.number-sign.wavefront.obj"
+		begin: "^\\s*(#)"
+		end: "$"
+		beginCaptures:
+			1: name: "punctuation.definition.comment.wavefront.obj"
+	
+	
