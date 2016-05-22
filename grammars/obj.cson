@@ -10,7 +10,9 @@ repository:
 	main:
 		patterns: [
 			{include: "#comment"}
-			{include: "#geometric-vertex"}
+			{include: "#escapes"}
+			{include: "#vertex"}
+			{include: "#float"}
 		]
 	
 	
@@ -40,28 +42,87 @@ repository:
 			4: name: "trailing.decimal"
 	
 	
-	# 3 or 4-point vector: [x, y, z, w?]
-	"vector-xyzw":
+	# XYZ[W] vector
+	xyzw:
 		name: "meta.vector.xyzw.wavefront.obj"
-		match: "\\G\\s+*(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?"
+		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?"
 		captures:
 			1: name: "entity.x.coordinate.wavefront.obj",  patterns: [include: "#float"]
 			2: name: "entity.y.coordinate.wavefront.obj",  patterns: [include: "#float"]
 			3: name: "entity.z.coordinate.wavefront.obj",  patterns: [include: "#float"]
 			4: name: "entity.w.weight.wavefront.obj",      patterns: [include: "#float"]
 	
+	# UVW vector
+	uvw:
+		name: "meta.vector.uvw.wavefront.obj"
+		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)"
+		captures:
+			1: name: "entity.u.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			2: name: "entity.v.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			3: name: "entity.w.coordinate.wavefront.obj",  patterns: [include: "#float"]
 	
-	# Geometric vertex
-	"geometric-vertex":
-		name: "meta.vertex.geometric.wavefront.obj"
-		begin: "^\\s*(v)(?=\\s|$)"
-		end: "$"
-		beginCaptures:
-			1: name: "keyword.function.wavefront.obj"
-		patterns: [
-			{include: "#escapes"}
-			{include: "#vector-xyzw"}
-			{include: "#float"}
-		]
+	# Normals vector
+	ijk:
+		name: "meta.vector.ijk.wavefront.obj"
+		match: "\\G\\s*(\\S+)\\s+(\\S+)\\s+(\\S+)"
+		captures:
+			1: name: "entity.i.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			2: name: "entity.j.coordinate.wavefront.obj",  patterns: [include: "#float"]
+			3: name: "entity.k.coordinate.wavefront.obj",  patterns: [include: "#float"]
 	
+	
+	# Vertex data
+	vertex:
+		patterns: [{
 			
+			# v: Geometric vertex
+			name: "meta.vertex.geometric.wavefront.obj"
+			begin: "^\\s*(v)(?=\\s|$)"
+			end:   "$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [
+				{include: "#escapes"}
+				{include: "#xyzw"}
+				{include: "#float"}
+			]
+		},{
+			
+			# vp: Parameter space vertex
+			name: "meta.vertex.parameter-space.wavefront.obj"
+			begin: "^\\s*(vp)(?=\\s|$)"
+			end:   "$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [
+				{include: "#escapes"}
+				{include: "#uvw"}
+				{include: "#float"}
+			]
+		},{
+			
+			# vn: Vertex normal
+			name: "meta.vertex.normal.wavefront.obj"
+			begin: "^\\s*(vn)(?=\\s|$)"
+			end:   "$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [
+				{include: "#escapes"}
+				{include: "#ijk"}
+				{include: "#float"}
+			]
+		},{
+			
+			# vt: Texture vertex
+			name: "meta.vertex.texture.wavefront.obj"
+			begin: "^\\s*(vt)(?=\\s|$)"
+			end:   "$"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [
+				{include: "#escapes"}
+				{include: "#uvw"}
+				{include: "#float"}
+			]
+		}]
