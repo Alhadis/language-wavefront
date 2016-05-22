@@ -44,12 +44,11 @@ repository:
 	# Numeric values
 	number:
 		name: "constant.numeric.wavefront.obj"
-		match: "(?<=[\\s,]|^)(-)?(\\d+)(?:(\\.)(\\d+))?\\b"
+		match: "(?<=[\\s,]|^)-?(\\d+)(?:(\\.)(\\d+))?\\b"
 		captures:
-			1: name: "keyword.operator.arithmetic.wavefront.obj"
-			2: name: "leading.decimal"
-			3: name: "decimal.separator"
-			4: name: "trailing.decimal"
+			1: name: "leading.decimal"
+			2: name: "decimal.separator"
+			3: name: "trailing.decimal"
 	
 	
 	# Mixed arguments used by General Statements
