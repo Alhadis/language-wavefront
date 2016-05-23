@@ -18,6 +18,7 @@ repository:
 			{include: "#freeform"}
 			{include: "#body-statements"}
 			{include: "#connect"}
+			{include: "#grouping"}
 			{include: "#number"}
 		]
 	
@@ -453,3 +454,52 @@ repository:
 			7: name: "entity.value.first-surface.start.wavefront.obj",  patterns: [include: "#number"]
 			8: name: "entity.value.first-surface.end.wavefront.obj",    patterns: [include: "#number"]
 			9: name: "entity.value.first-surface.curve.wavefront.obj",  patterns: [include: "#number"]
+
+
+
+	# Grouping statements
+	grouping:
+		patterns: [{
+			
+			# g: Group
+			name: "meta.grouping-statement.group.wavefront.obj"
+			begin: "^\\s*(g)(?:\\s|$|#)"
+			end:   "(?<!\\\\)$|(?=#)"
+			contentName: "meta.group-names.wavefront.obj"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [{
+				
+				# Individual group name(s)
+				name: "variable.parameter.group-name.wavefront.obj"
+				match: "(?!#)\\S+(?<!#)"
+			
+			}, include: "#global"]
+		},{
+			
+			# s: Smoothing group
+			name: "meta.grouping-statement.smoothing-group.wavefront.obj"
+			match: "^\\s*(s)\\s+(?:(\\d+)|(off))(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.numeric.wavefront.obj"
+				3: name: "constant.language.off.wavefront.obj"
+		},{
+			
+			# mg: Merging group/resolution
+			name: "meta.free-form.grouping-statement.merge-group.wavefront.obj"
+			match: "^\\s*(mg)\\s+(?:(off)(?=\\s|$|#)|(\\d+)\\s+([-\\d.]+))"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.off.wavefront.obj"
+				3: name: "entity.group-number.wavefront.obj", patterns: [include: "#number"]
+				4: name: "entity.max-distance.wavefront.obj", patterns: [include: "#number"]
+		},{
+			
+			# o: User-defined object statement
+			name: "meta.grouping-statement.user-defined.wavefront.obj"
+			match: "^\\s*(o)\\s+(?!#)(\\S+)(?<!#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "variable.parameter.object-name.wavefront.obj"
+		}]
