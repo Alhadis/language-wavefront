@@ -19,6 +19,7 @@ repository:
 			{include: "#body-statements"}
 			{include: "#connect"}
 			{include: "#grouping"}
+			{include: "#display"}
 			{include: "#number"}
 		]
 	
@@ -502,4 +503,175 @@ repository:
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
 				2: name: "variable.parameter.object-name.wavefront.obj"
+		}]
+
+
+	# Display/render attributes
+	display:
+		patterns: [{
+			
+			# bevel: Bevel interpolation
+			name: "meta.display.polygonal.attribute.bevel.wavefront.obj"
+			match: "^\\s*(bevel)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.$2.wavefront.obj"
+		},{
+			
+			# c_interp: Colour interpolation
+			name: "meta.display.polygonal.attribute.colour-interpolation.wavefront.obj"
+			match: "^\\s*(c_interp)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.$2.wavefront.obj"
+		},{
+			
+			# d_interp: Dissolve interpolation
+			name: "meta.display.polygonal.attribute.dissolve-interpolation.wavefront.obj"
+			match: "^\\s*(d_interp)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.$2.wavefront.obj"
+		},{
+			
+			# lod: Level of detail
+			name: "meta.display.attribute.level-of-detail.wavefront.obj"
+			match: "^\\s*(lod)\\s+([-\\d.]+)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "entity.value.wavefront.obj", patterns: [include: "#number"]
+		},{
+		
+			# maplib: Map library
+			name: "meta.display.attribute.map-library.wavefront.obj"
+			begin: "^\\s*(maplib)(?=\\s|$|#)"
+			end: "(?<!\\\\)$|(?=#)"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [{
+				
+				# Filenames
+				name: "string.filename.wavefront.obj"
+				match: "(?!#)\\S+(?<!#)"
+			
+			}, include: "#global"]
+		},{
+			
+			# usemap: Specify texture map name
+			name: "meta.display.attribute.use-map.wavefront.obj"
+			match: "^\\s*(usemap)\\s+(?:(off)|(?!#)(\\S+)(?<!#))"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.off.wavefront.obj"
+				3: name: "variable.parameter.map-name.wavefront.obj"
+		},{
+		
+			# usemtl: Specify material name
+			name: "meta.display.attribute.use-material.wavefront.obj"
+			match: "^\\s*(usemtl)\\s+(?!#)(\\S+)(?<!#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "variable.parameter.material-name.wavefront.obj"
+		},{
+			
+			# mtllib: Material library
+			name: "meta.display.attribute.material-library.wavefront.obj"
+			begin: "^\\s*(mtllib)(?=\\s|$|#)"
+			end: "(?<!\\\\)$|(?=#)"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+			patterns: [{
+				
+				# Filenames
+				name: "string.filename.wavefront.obj"
+				match: "(?!#)\\S+(?<!#)"
+				
+			}, include: "#global"]
+		},{
+			
+			# shadow_obj: Shadow object
+			name: "meta.display.attribute.shadow-object.wavefront.obj"
+			match: "^\\s*(shadow_obj)\\s+(?!#)(\\S+)(?<!#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "string.filename.wavefront.obj"
+		},{
+			
+			# trace_obj: Raytracing object
+			name: "meta.display.attribute.trace-object.wavefront.obj"
+			match: "^\\s*(trace_obj)\\s+(?!#)(\\S+)(?<!#)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "string.filename.wavefront.obj"
+		},{
+			
+			# ctech: Curve approximation technique
+			name: "meta.display.free-form.attribute.curve-technique.wavefront.obj"
+			begin: "^\\s*(ctech)\\s+(cparm|cspace|curv)(?=\\s|$|#)"
+			end: "(?<!\\\\)$|(?=#)"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.$2.wavefront.obj"
+			patterns: [{
+				
+				# cparm: Constant parametric subdivision
+				match: "\\G(?<=cparm)\\s+([-\\d.]+)"
+				name: "entity.value.resolution.wavefront.obj"
+				captures: 1: patterns: [include: "#number"]
+				
+			},{
+			
+				# cspace: Constant spatial subdivision
+				match: "\\G(?<=cspace)\\s+([-\\d.]+)"
+				name: "entity.value.max-length.wavefront.obj"
+				captures: 1: patterns: [include: "#number"]
+				
+			},{
+			
+				# curv: Curvature-dependent subdivision
+				match: "\\G(?<=curv)\\s+([-\\d.]+)\\s+([-\\d.]+)"
+				captures:
+					1: name: "entity.value.max-distance.wavefront.obj",  patterns: [include: "#number"]
+					2: name: "entity.value.max-angle.wavefront.obj",     patterns: [include: "#number"]
+				
+			}, include: "#global"]
+		},{
+			
+			# stech: Surface approximation technique
+			name: "meta.display.free-form.attribute.surface-technique.wavefront.obj"
+			begin: "^\\s*(stech)\\s+(cparma|cparmb|cspace|curv)(?=\\s|$|#)"
+			end: "(?<!\\\\)$|(?=#)"
+			beginCaptures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "constant.language.$2.wavefront.obj"
+			patterns: [{
+				
+				# cparma: Constant parametric subdivision (separate parameters)
+				match: "\\G(?<=cparma)\\s+([-\\d.]+)\\s+([-\\d.]+)"
+				captures:
+					1: name: "entity.value.u-resolution.wavefront.obj",  patterns: [include: "#number"]
+					2: name: "entity.value.v-resolution.wavefront.obj",  patterns: [include: "#number"]
+			},{
+				
+				# cparmb: Constant parametric subdivision (uniform/one parameter)
+				match: "\\G(?<=cparmb)\\s+([-\\d.]+)"
+				name: "entity.value.uv-resolution.wavefront.obj"
+				captures: 1: patterns: [include: "#number"]
+			
+			},{
+				
+				# cspace: Constant spatial subdivision
+				match: "\\G(?<=cspace)\\s+([-\\d.]+)"
+				name: "entity.value.max-length.wavefront.obj"
+				captures: 1: patterns: [include: "#number"]
+				
+			}, {
+				
+				# curv: Curvature-dependent subdivision
+				match: "\\G(?<=curv)\\s+([-\\d.]+)\\s+([-\\d.]+)"
+				captures:
+					1: name: "entity.value.max-distance.wavefront.obj",  patterns: [include: "#number"]
+					2: name: "entity.value.max-angle.wavefront.obj",     patterns: [include: "#number"]
+				
+			}, include: "#global"]
 		}]
