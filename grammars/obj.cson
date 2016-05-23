@@ -20,6 +20,7 @@ repository:
 			{include: "#connect"}
 			{include: "#grouping"}
 			{include: "#display"}
+			{include: "#superseded"}
 			{include: "#number"}
 		]
 	
@@ -674,4 +675,50 @@ repository:
 					2: name: "entity.value.max-angle.wavefront.obj",     patterns: [include: "#number"]
 				
 			}, include: "#global"]
+		}]
+
+
+	# Superseded keywords (deprecated in v3.0 of the OBJ specification)
+	superseded:
+		patterns: [{
+			
+			# bsp: B-spline patch
+			name: "invalid.deprecated.b-spline-patch.wavefront.obj"
+			match: "^\\s*(bsp)(?:$|((?:\\s+\\d+(?=\\s)){0,16}))"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "meta.arguments.wavefront.obj", patterns: [include: "#vertref-single"]
+		},{
+			
+			# bzp: Bezier patch
+			name: "invalid.deprecated.bezier-patch.wavefront.obj"
+			match: "^\\s*(bzp)(?:$|((?:\\s+\\d+(?=\\s)){0,16}))"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "meta.arguments.wavefront.obj", patterns: [include: "#vertref-single"]
+		},{
+			
+			# cdc: Cardinal curve
+			name: "invalid.deprecated.cardinal-curve.wavefront.obj"
+			match: "^\\s*(cdc)(?:$|((?:\\s+\\d+(?=\\s))*))"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "meta.arguments.wavefront.obj", patterns: [include: "#vertref-single"]
+		},{
+			
+			# cdp: Cardinal patch
+			name: "invalid.deprecated.cardinal-patch.wavefront.obj"
+			match: "^\\s*(cdp)(?:$|((?:\\s+\\d+(?=\\s)){0,16}))"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "meta.arguments.wavefront.obj", patterns: [include: "#vertref-single"]
+		},{
+			
+			# res: Segment resolution attribute
+			name: "invalid.deprecated.display.attribute.segment-resolution.wavefront.obj"
+			match: "^\\s*(res)\\s+([-\\d.]+)\\s+([-\\d.]+)"
+			captures:
+				1: name: "keyword.function.$1.wavefront.obj"
+				2: name: "entity.value.u-segments.wavefront.obj", patterns: [include: "#vertref-single"]
+				3: name: "entity.value.v-segments.wavefront.obj", patterns: [include: "#vertref-single"]
 		}]
