@@ -17,6 +17,7 @@ repository:
 			{include: "#attributes"}
 			{include: "#freeform"}
 			{include: "#body-statements"}
+			{include: "#connect"}
 			{include: "#number"}
 		]
 	
@@ -422,3 +423,33 @@ repository:
 			name: "keyword.control.body-statement.end.wavefront.obj"
 			match: "^\\s*end(?=\\s|$|#)"
 		}]
+
+
+	# Connectivity statement
+	connect:
+		name: "meta.free-form.connectivity.wavefront.obj"
+		match: """(?x)
+			^\\s*
+			
+			(con)           # 1: keyword.function.$1.wavefront.obj
+			
+			\\s+(\\d+)      # 2: entity.value.first-surface.index.wavefront.obj
+			\\s+([-\\d.]+)  # 3: entity.value.first-surface.start.wavefront.obj
+			\\s+([-\\d.]+)  # 4: entity.value.first-surface.end.wavefront.obj
+			\\s+(\\d+)      # 5: entity.value.first-surface.curve.wavefront.obj
+			
+			\\s+(\\d+)      # 6: entity.value.second-surface.index.wavefront.obj
+			\\s+([-\\d.]+)  # 7: entity.value.second-surface.start.wavefront.obj
+			\\s+([-\\d.]+)  # 8: entity.value.second-surface.end.wavefront.obj
+			\\s+(\\d+)      # 9: entity.value.second-surface.curve.wavefront.obj
+		"""
+		captures:
+			1: name: "keyword.function.$1.wavefront.obj"
+			2: name: "entity.value.first-surface.index.wavefront.obj",  patterns: [include: "#number"]
+			3: name: "entity.value.first-surface.start.wavefront.obj",  patterns: [include: "#number"]
+			4: name: "entity.value.first-surface.end.wavefront.obj",    patterns: [include: "#number"]
+			5: name: "entity.value.first-surface.curve.wavefront.obj",  patterns: [include: "#number"]
+			6: name: "entity.value.first-surface.index.wavefront.obj",  patterns: [include: "#number"]
+			7: name: "entity.value.first-surface.start.wavefront.obj",  patterns: [include: "#number"]
+			8: name: "entity.value.first-surface.end.wavefront.obj",    patterns: [include: "#number"]
+			9: name: "entity.value.first-surface.curve.wavefront.obj",  patterns: [include: "#number"]
