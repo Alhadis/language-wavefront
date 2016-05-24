@@ -59,7 +59,7 @@ descriptions.
 After you specify a new material with the ``newmtl`` statement, you can
 enter the statements that describe the materials in any order. However,
 when the Property Editor writes an ``.mtl`` file, it puts the statements
-in a system-assigned order. In this chapter, the statements are
+in a system-assigned order. In this section, the statements are
 described in the system-assigned order.
 
 The following is a sample format for a material definition in an
@@ -215,6 +215,8 @@ Kd:
 	  1.0. Values outside this range increase or decrease the
 	  reflectivity accordingly.
 
+
+.. _Spectral Curve File (.rfl):
 
 Kd spectral:
 	The ``Kd spectral`` statement specifies the diffuse
@@ -392,7 +394,7 @@ illum illum\_#:
 
 	``illum_#`` can be a number from 0 to 10. The illumination
 	models are summarised below; for complete descriptions see
-	*"Illumination models"* on page 5-30.
+	`Illumination models`_.
 
 	==================  ===========================================
 	Illumination model  Properties turned on in the Property Editor
@@ -452,8 +454,7 @@ d -halo:
 
 		dissolve = 1.0 - (N*v)(1.0-factor)
 
-	For a definition of terms, see *"Illumination models"*
-	on page 5-30.
+	For a definition of terms, see `Illumination models`_.
 
 
 Ns:
@@ -615,8 +616,7 @@ Procedural texture files
 Procedural texture files use mathematical formulae to calculate
 sample values of the texture. The procedural texture file is
 compiled, stored, and accessed by the Image program when
-rendering. For more information, see chapter 9,
-*"Procedural Texture Files (.cxc, .cxb. and .cxs)"*.
+rendering. For more information, see `Procedural Texture Files`_.
 
 The following syntax describes the texture map statements that
 apply to ``.mtl`` files. These statements can be used alone or with
@@ -642,8 +642,8 @@ map_Ka:
 		look, use the ``.rfl`` file ``ident`` as the
 		underlying material. This applies to the
 		``map_Ka``, ``map_Kd``, and ``map_Ks`` statements.
-		For more information on ``.rfl`` files, see chapter 8,
-		*"Spectral Curve File (.rfl)"*.
+		For more information on ``.rfl`` files, see
+		`Spectral Curve File (.rfl)`_.
 
 	The options for the ``map_Ka`` statement are listed below::
 
@@ -658,7 +658,7 @@ map_Ka:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 map_Kd:
@@ -687,7 +687,7 @@ map_Kd:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 map_Ks:
@@ -716,7 +716,7 @@ map_Ks:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 map_Ns:
@@ -745,7 +745,7 @@ map_Ns:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 map_d:
@@ -773,7 +773,7 @@ map_d:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 map_aat on:
@@ -848,7 +848,7 @@ decal:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 
@@ -876,7 +876,7 @@ disp:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 bump:
@@ -904,7 +904,7 @@ bump:
 		-texres value
 
 	These options are described in detail in
-	*"Options for texture map statements"* on page 5-18.
+	`Options for texture map statements`_.
 
 
 
@@ -1219,7 +1219,7 @@ refl:
 		-texres value
 
 	The options for the reflection map statement are described in
-	detail in *"Options for texture map statements"* on page 18.
+	detail in `Options for texture map statements`_.
 
 
 Examples
