@@ -1,3 +1,16 @@
+..
+	Translated into reStructuredText from its original source:
+	http://paulbourke.net/dataformats/mtl/
+
+	Minor adjustments have been made to improve grammar, spelling,
+	and document structure. Care has been taken not to alter the
+	intended meaning of the text.
+
+	Much of this page's content is platform-specific, but it's the
+	closest thing to a canonical specification the format seems to
+	have.
+
+
 MTL material format (Lightwave, OBJ)
 ====================================
 
@@ -7,10 +20,9 @@ MTL material format (Lightwave, OBJ)
 | Copyright 1995 Alias\|Wavefront, Inc.
 | All rights reserved
 
-========================================================================
 
-5. Material Library File (.mtl)
--------------------------------
+Material Library File (.mtl)
+----------------------------
 
 Material library files contain one or more material definitions, each of
 which includes the colour, texture, and reflection map of individual
@@ -538,11 +550,11 @@ discarded after rendering.
 
 The material parameters that can be modified by a texture map are:
 
-:Ka: Colour
-:Kd: Colour
-:Ks: Colour
-:Ns: Scalar
-:d:  Scalar
+- ``Ka``: Colour
+- ``Kd``: Colour
+- ``Ks``: Colour
+- ``Ns``: Scalar
+- ``d``:  Scalar
 
 In addition to the material parameters, the surface normal can be
 modified.
@@ -568,7 +580,7 @@ The texture file types you can use are:
 Mip-mapped texture files
 ````````````````````````
 Mip-mapped texture files are created from images using the
-Create Textures panel in the Director or the "texture2D"
+Create Textures panel in the Director or the ``texture2D``
 program. There are three types of texture files:
 
 - Colour texture files: ``.mpc``
@@ -607,8 +619,8 @@ Bump textures:
 	a bump texture represents the topology or height of
 	the surface relative to the average surface. Dark
 	areas are depressions and light areas are high
-	points. The effect is like embossing the surface with
-	the texture.
+	points. The effect is like embossing the surface
+	with the texture.
 
 
 Procedural texture files
@@ -1060,12 +1072,11 @@ map statements.
 
 	* | ``u`` is the value for the horizontal direction of the
 	     texture
-	* | ``v`` is an optional argument.
+	* | ``v`` is an optional argument
 	  | ``v`` is the value for the vertical direction of the
-	     texture.
-
-	* | ``w`` is an optional argument.
-	  | ``w`` is the value used for the depth of a 3D texture.
+	     texture
+	* | ``w`` is an optional argument
+	  | ``w`` is the value used for the depth of a 3D texture
 
 
 -s:
@@ -1078,14 +1089,14 @@ map statements.
 	The default is ``1, 1, 1``.
 
 	* | ``u`` is the value for the horizontal direction of the
-	  | texture
+	    texture
 	* | ``v`` is an optional argument
 	* | ``v`` is the value for the vertical direction of the
-	  | texture
+	    texture
 	* | ``w`` is an optional argument
 	  | ``w`` is a value used for the depth of a 3D texture
 	  | ``w`` is a value used for the amount of tessellation
-	  | of the displacement map
+	    of the displacement map
 
 
 -t:
@@ -1104,13 +1115,13 @@ map statements.
 	marble and granite.
 
 	* | ``u`` is the value for the horizontal direction of the
-	  | texture turbulence
+	    texture turbulence
 	* | ``v`` is an optional argument
 	* | ``v`` is the value for the vertical direction of the
-	  | texture turbulence
+	    texture turbulence
 	* | ``w`` is an optional argument
 	* | ``w`` is a value used for the depth of the texture
-	  | turbulence
+	    turbulence
 
 	By default, the turbulence for every texture map used in a
 	material is ``uvw = (0,0,0)``. This means that no turbulence
@@ -1259,9 +1270,8 @@ This is a flat green, partially-dissolved material::
 4. Shiny green
 ^^^^^^^^^^^^^^
 This is a shiny green material. When applied to an object, it
-shows a white specular highlight.
+shows a white specular highlight. ::
 
-::
 	newmtl shiny_green
 	Ka 0.0000 1.0000 0.0000
 	Kd 0.0000 1.0000 0.0000
@@ -1273,9 +1283,8 @@ shows a white specular highlight.
 5. Green mirror
 ^^^^^^^^^^^^^^^
 This is a reflective green material. When applied to an object,
-it reflects other objects in the same scene.
+it reflects other objects in the same scene. ::
 
-::
 	newmtl green_mirror
 	Ka 0.0000 1.0000 0.0000
 	Kd 0.0000 1.0000 0.0000
@@ -1288,9 +1297,8 @@ it reflects other objects in the same scene.
 ^^^^^^^^^^^^^^^^^^
 This material approximates a glass surface. Is it almost completely
 transparent, but it shows reflections of other objects in the scene.
-It will not distort the image of objects seen through the material.
+It will not distort the image of objects seen through the material. ::
 
-::
 	newmtl fake_windsh
 	Ka 0.0000 0.0000 0.0000
 	Kd 0.0000 0.0000 0.0000
@@ -1304,9 +1312,8 @@ It will not distort the image of objects seen through the material.
 ^^^^^^^^^^^^^^^
 This material exhibits an effect known as Fresnel reflection. When
 applied to an object, white fringes may appear where the object's
-surface is viewed at a glancing angle.
+surface is viewed at a glancing angle. ::
 
-::
 	newmtl fresnel_blu
 	Ka 0.0000 0.0000 0.0000
 	Kd 0.0000 0.0000 0.0000
@@ -1323,9 +1330,8 @@ to the transmission colour of the material. The material also distorts
 the image of objects according to its optical density. Note that the
 material is not dissolved and that its ambient, diffuse, and specular
 reflective colours have been set to black. Only the transmission colour
-is non-black.
+is non-black. ::
 
-::
 	newmtl real_windsh
 	Ka 0.0000 0.0000 0.0000
 	Kd 0.0000 0.0000 0.0000
@@ -1356,9 +1362,8 @@ This material is based on spectral reflectance samples taken from an
 actual piece of tin. These samples are stored in a separate ``.rfl``
 file that is referred to by name in the material. Spectral sample files
 (``.rfl``) can be used in any type of material as an alternative to RGB
-values.
+values. ::
 
-::
 	newmtl tin
 	Ka spectral tin.rfl
 	Kd spectral tin.rfl
@@ -1377,9 +1382,8 @@ diffuse regions of that object's surface.
 The colour information for the texture is stored in a separate ``.mpc``
 file that is referred to in the material by its name, ``pine.mpc``. If
 you use different ``.mpc`` files for ambient and diffuse, you will get
-unrealistic results.
+unrealistic results. ::
 
-::
 	newmtl pine_wood
 	Ka spectral ident.rfl 1
 	Kd spectral ident.rfl 1
@@ -1399,9 +1403,8 @@ The colour information for the texture is stored in a separate ``.mpc``
 file that is referred to in the material by its name, ``brown.mpc``.
 The bump information is stored in a separate .mpb file that is referred
 to in the material by its name, ``leath.mpb``. The ``-bm`` option is
-used to raise the apparent height of the leather bumps.
+used to raise the apparent height of the leather bumps. ::
 
-::
 	newmtl bumpy_leath
 	Ka spectral ident.rfl 1
 	Kd spectral ident.rfl 1
@@ -1421,11 +1424,10 @@ the texture's true colour. When applied to an object, the object becomes
 transparent in certain areas and opaque in others.
 
 The variation between opaque and transparent regions is controlled by
-scalar information stored in a separate ``.mps`` file that is referred to
-in the material by its name, ``window.mps``. The ``-mm`` option is used
-to shift and compress the range of opacity.
+scalar information stored in a separate ``.mps`` file that is referred
+to in the material by its name, ``window.mps``. The ``-mm`` option is
+used to shift and compress the range of opacity. ::
 
-::
 	newmtl frost_wind
 	Ka 0.2 0.2 0.2
 	Kd 0.6 0.6 0.6
@@ -1445,9 +1447,9 @@ texture's true colour.
 
 In this example, the original image of the logo is off-centre to the
 left. To compensate, the texture's origin is shifted back to the right
-(the positive "u" direction) using the ``-o`` option to modify the origin.
+(the positive "u" direction) using the ``-o`` option to modify the
+origin. ::
 
-::
 	Ka spectral ident.rfl 1
 	Kd spectral ident.rfl 1
 	Ks spectral ident.rfl 1
@@ -1461,15 +1463,14 @@ left. To compensate, the texture's origin is shifted back to the right
 ^^^^^^^^^^^^^^^
 This material includes a texture map showing how a texture may be
 scaled left or right (in the "u" direction) or up and down (in the "v"
-direction). The material colour is set to "ident" to preserve the
+direction). The material colour is set to ``ident`` to preserve the
 texture's true colour.
 
 In this example, the original image of the logo is too small. To
 compensate, the texture is scaled slightly to the right (in the positive
 "u" direction) and up (in the positive "v" direction) using the ``-s``
-option to modify the scale.
+option to modify the scale. ::
 
-::
 	Ka spectral ident.rfl 1
 	Kd spectral ident.rfl 1
 	Ks spectral ident.rfl 1
@@ -1486,9 +1487,8 @@ material).
 
 This material is highly reflective with no diffuse or ambient
 contribution. Its reflection map is an image with silver streaks that
-yields a chrome appearance when viewed as a reflection.
+yields a chrome appearance when viewed as a reflection. ::
 
-::
 	ka 0 0 0
 	kd 0 0 0
 	ks .7 .7 .7
