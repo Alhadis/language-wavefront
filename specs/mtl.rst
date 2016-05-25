@@ -739,7 +739,7 @@ map_Ns:
 
 	.. code-block::
 
-		-options args filename
+		map_Ns -options args filename
 
 	``filename`` is the name of a scalar texture file (``.mps``),
 	a scalar procedural texture file (``.cxs``), or an image file.

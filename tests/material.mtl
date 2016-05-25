@@ -38,35 +38,13 @@ sharpness 60
 Ni 1.19713
 
 
-# XXX: Texture options
--blendu off
--blendu on
--blendv on
--blendv off
--bm 2.2
--boost 2.2
--cc on
--cc off
--clamp on
--clamp off
--imfchan r
--imfchan g
--imfchan b
--imfchan m
--mm 2 2
--mm 2
--o 22
--o 22 33 44
--s 1 2 3
--t 1 2 3
--texres 3.2
-
 # Texture map statements
 map_Ka -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
 map_Kd -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
 map_Ks -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
 map_Ns -s 1 1 1 -o 0 0 0 -mm 0 1 wisp.mps
 map_d -s 1 1 1 -o 0 0 0 -mm 0 1 wisp.mps
+map_aat on
 disp -s 1 1 .5 wisp.mps
 decal -s 1 1 1 -o 0 0 0 -mm 0 1 sand.mps
 bump -s 1 1 1 -o 0 0 0 -bm 1 sand.mpb

@@ -12,7 +12,8 @@ repository:
 			{include: "#comment"}
 			{include: "#newmtl"}
 			{include: "#colour"}
-			{include: "#texture-options"}
+			{include: "#texture"}
+			{include: "#reflection"}
 		]
 
 	# Comment-lines
@@ -259,12 +260,112 @@ repository:
 
 
 
-	# Procedural texture statements
+	# Texture map statements
 	texture:
 		patterns: [{
 			
+			# map_Ka [-options args filename]: Ambient reflectivity
+			name: "meta.texture-map.ambient-reflectivity.wavefront.mtl"
+			begin: "^\\s*(map_Ka)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# map_Kd [-options args filename]: Diffuse reflectivity
+			name: "meta.texture-map.diffuse-reflectivity.wavefront.mtl"
+			begin: "^\\s*(map_Kd)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# map_Ks [-options args filename]: Specular reflectivity
+			name: "meta.texture-map.specular-reflectivity.wavefront.mtl"
+			begin: "^\\s*(map_Ks)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# map_Ns [-options args filename]: Specular exponent
+			name: "meta.texture-map.specular-exponent.wavefront.mtl"
+			begin: "^\\s*(map_Ns)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# map_d [-options args filename]: Dissolve
+			name: "meta.texture-map.dissolve.wavefront.mtl"
+			begin: "^\\s*(map_d)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# map_aat [on]: Enable antialiasing
+			name: "meta.texture-map.antialiasing.wavefront.mtl"
+			match: "^\\s*(map_aat)(?:\\s+(on|off)(?=\\s|$|#))?"
+			captures:
+				1: name: "keyword.function.$1.wavefront.mtl"
+				2: name: "constant.language.boolean.$2.wavefront.mtl"
+		},{
+			
+			# decal -[options args filename]: Selectively replace material colour with texture colour
+			name: "meta.texture-map.decal.wavefront.mtl"
+			begin: "^\\s*(decal)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# disp [-options args filename]: Displacement map
+			name: "meta.texture-map.displacement.wavefront.mtl"
+			begin: "^\\s*(disp)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# bump [-options args filename]: Bump map
+			name: "meta.texture-map.bump.wavefront.mtl"
+			begin: "^\\s*(bump)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
 		}]
 
+
+	# Reflection map statements
+	reflection:
+		name: "meta.reflection-map.type-$4.wavefront.mtl"
+		begin: "^\\s*(refl)\\s+((-)type)\\s+(sphere|cube_(?:top|bottom|front|back|left|right))(?=\\s|$|#)"
+		end:   "(?=$|#)"
+		contentName: "meta.options.wavefront.mtl"
+		patterns: [include: "#reflection-options"]
+		beginCaptures:
+			1: name: "keyword.function.$1.wavefront.mtl"
+			2: name: "keyword.option.type.wavefront.mtl"
+			3: name: "punctuation.definition.dash.wavefront.mtl"
+			4: name: "constant.language.mapping-type.$4.wavefront.mtl"
+	
 
 	# Options for texture map statements
 	"texture-options":
@@ -383,4 +484,16 @@ repository:
 				1: name: "keyword.option.texres.wavefront.mtl"
 				2: name: "punctuation.definition.dash.wavefront.mtl"
 				3: name: "entity.value.wavefront.mtl", patterns: [include: "#number"]
+		}]
+
+	
+	# Options for reflection map statements. Identical to #texture-options,
+	# save that unrecognised arguments are highlighted as filenames
+	"reflection-options":
+		patterns: [{
+			include: "#texture-options"
+		},{
+			# Trailing filename
+			name: "string.filename.wavefront.mtl"
+			match: "(?!#)\\S+(?<!#)"
 		}]
