@@ -1,0 +1,12 @@
+{
+	"name": "language-wavefront",
+	"version": "1.0.0",
+	"description": "Syntax highlighting for Wavefront OBJ/MTL files",
+	"keywords": ["Wavefront", "OBJ", "MTL", "Object", "Material", "Texture", "Map", "3D", "Mesh", "Polygon", "Geometry"],
+	"repository": "https://github.com/Alhadis/language-wavefront",
+	"license": "ISC",
+	"engines": {
+		"atom": "*"
+	},
+	"dependencies": {}
+}
