@@ -14,6 +14,7 @@ repository:
 			{include: "#colour"}
 			{include: "#texture"}
 			{include: "#reflection"}
+			{include: "#number"}
 		]
 
 	# Comment-lines
@@ -41,6 +42,13 @@ repository:
 				1: name: "leading.decimal"
 				2: name: "decimal.separator"
 				3: name: "trailing.decimal"
+		},{
+			# Floating-point: No leading digits
+			name: "constant.numeric.float.no-leading-digits.wavefront.mtl"
+			match: "(?<=[\\s,]|^)-?(\\.)(\\d+)\\b"
+			captures:
+				1: name: "decimal.separator"
+				2: name: "trailing.decimal"
 		}]
 
 	
