@@ -12,6 +12,7 @@ repository:
 			{include: "#comment"}
 			{include: "#newmtl"}
 			{include: "#colour"}
+			{include: "#texture-options"}
 		]
 
 	# Comment-lines
@@ -222,11 +223,12 @@ repository:
 	# Dissolve
 	d:
 		name: "meta.dissolve.wavefront.mtl"
-		match: "^\\s*(d)(?:\\s+(-halo))?\\s+([-\\d.]+)"
+		match: "^\\s*(d)(?:\\s+((-)halo))?\\s+([-\\d.]+)"
 		captures:
 			1: name: "keyword.function.$1.wavefront.mtl"
 			2: name: "storage.modifier.halo.wavefront.mtl"
-			3: name: "entity.value.factor.wavefront.mtl", patterns: [include: "#number"]
+			3: name: "punctuation.definition.dash.wavefront.mtl"
+			4: name: "entity.value.factor.wavefront.mtl", patterns: [include: "#number"]
 
 
 	# Specular exponent
@@ -254,3 +256,131 @@ repository:
 		captures:
 			1: name: "keyword.function.$1.wavefront.mtl"
 			2: name: "entity.value.wavefront.mtl", patterns: [include: "#number"]
+
+
+
+	# Procedural texture statements
+	texture:
+		patterns: [{
+			
+		}]
+
+
+	# Options for texture map statements
+	"texture-options":
+		patterns: [{
+			
+			# blendu: Set texture blending in horizontal direction ("U" axis)
+			name: "meta.texture-option.horizontal-blending.wavefront.mtl"
+			match: "(?<=\\s|^)((-)blendu)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.option.blendu.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "constant.language.boolean.$3.wavefront.mtl"
+		},{
+			
+			# blendv: Set texture blending in vertical direction ("V" axis)
+			name: "meta.texture-option.vertical-blending.wavefront.mtl"
+			match: "(?<=\\s|^)((-)blendv)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.option.blendv.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "constant.language.boolean.$3.wavefront.mtl"
+		},{
+		
+			# bm: Bump multiplier
+			name: "meta.texture-option.bump-multiplier.wavefront.mtl"
+			match: "(?<=\\s|^)((-)bm)\\s+([-\\d.]+)"
+			captures:
+				1: name: "keyword.option.bm.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# boost: Increase sharpness/clarity of mip-mapped textures
+			name: "meta.texture-option.boost.wavefront.mtl"
+			match: "(?<=\\s|^)((-)boost)\\s+([-\\d.]+)"
+			captures:
+				1: name: "keyword.option.boost.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# cc: Colour correction
+			name: "meta.texture-option.colour-correction.wavefront.mtl"
+			match: "(?<=\\s|^)((-)cc)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.option.cc.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "constant.language.boolean.$3.wavefront.mtl"
+		},{
+			
+			# clamp: Clamping
+			name: "meta.texture-option.clamping.wavefront.mtl"
+			match: "(?<=\\s|^)((-)clamp)\\s+(on|off)(?=\\s|$|#)"
+			captures:
+				1: name: "keyword.option.clamp.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "constant.language.boolean.$3.wavefront.mtl"
+		},{
+			
+			# imfchan: Image channel for scalar/bump textures
+			name: "meta.texture-option.channel.wavefront.mtl"
+			match: "(?<=\\s|^)((-)imfchan)(?:\\s+([rgbmlz])(?=\\s|$|#))?"
+			captures:
+				1: name: "keyword.option.imfchan.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "constant.language.boolean.$3.wavefront.mtl"
+		},{
+			
+			# mm: Modify value ranges
+			name: "meta.texture-option.modify-range.wavefront.mtl"
+			match: "(?<=\\s|^)((-)mm)\\s+([-\\d.]+)(?:\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.option.mm.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.base.wavefront.mtl", patterns: [include: "#number"]
+				4: name: "entity.value.gain.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# o: Offset
+			name: "meta.texture-option.offset.wavefront.mtl"
+			match: "(?<=\\s|^)((-)o)\\s+([-\\d.]+)(?:\\s+([-\\d.]+))?(?:\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.option.o.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.u-offset.wavefront.mtl", patterns: [include: "#number"]
+				4: name: "entity.value.v-offset.wavefront.mtl", patterns: [include: "#number"]
+				5: name: "entity.value.w-offset.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# s: Scale
+			name: "meta.texture-option.scale.wavefront.mtl"
+			match: "(?<=\\s|^)((-)s)\\s+([-\\d.]+)(?:\\s+([-\\d.]+))?(?:\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.option.s.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.u-scale.wavefront.mtl", patterns: [include: "#number"]
+				4: name: "entity.value.v-scale.wavefront.mtl", patterns: [include: "#number"]
+				5: name: "entity.value.w-scale.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# t: Turbulence
+			name: "meta.texture-option.turbulence.wavefront.mtl"
+			match: "(?<=\\s|^)((-)t)\\s+([-\\d.]+)(?:\\s+([-\\d.]+))?(?:\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.option.t.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.u-value.wavefront.mtl", patterns: [include: "#number"]
+				4: name: "entity.value.v-value.wavefront.mtl", patterns: [include: "#number"]
+				5: name: "entity.value.w-value.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# texres: Texture resolution
+			name: "meta.texture-option.resolution.wavefront.mtl"
+			match: "(?<=\\s|^)((-)texres)\\s+([-\\d.]+)"
+			captures:
+				1: name: "keyword.option.texres.wavefront.mtl"
+				2: name: "punctuation.definition.dash.wavefront.mtl"
+				3: name: "entity.value.wavefront.mtl", patterns: [include: "#number"]
+		}]
