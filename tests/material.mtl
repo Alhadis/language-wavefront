@@ -23,6 +23,12 @@ Ks spectral file.rfl 0.5
 Ks xyz 2
 Ks xyz 1 2 3
 
+Tf 2
+Tf 0.1086 0.1086 0.1086
+Tf spectral file.rfl
+Tf spectral file.rfl 3
+Tf xyz 1
+Tf xyz 1 2 3
 
 Tf 0.9885 0.9885 0.9885
 illum 6

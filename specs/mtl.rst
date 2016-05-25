@@ -382,7 +382,7 @@ Tf spectral:
 
 
 Tf xyz:
-	The ``Ks xyz`` statement specifies the specular reflectivity
+	The ``Tf xyz`` statement specifies the transmission filter
 	using CIEXYZ values::
 
 		Tf xyz x y z
