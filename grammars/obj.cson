@@ -485,7 +485,7 @@ repository:
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
 				2: name: "constant.numeric.wavefront.obj"
-				3: name: "constant.language.off.wavefront.obj"
+				3: name: "constant.language.boolean.off.wavefront.obj"
 		},{
 			
 			# mg: Merging group/resolution
@@ -493,7 +493,7 @@ repository:
 			match: "^\\s*(mg)\\s+(?:(off)(?=\\s|$|#)|(\\d+)\\s+([-\\d.]+))"
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
-				2: name: "constant.language.off.wavefront.obj"
+				2: name: "constant.language.boolean.off.wavefront.obj"
 				3: name: "entity.group-number.wavefront.obj", patterns: [include: "#number"]
 				4: name: "entity.max-distance.wavefront.obj", patterns: [include: "#number"]
 		},{
@@ -516,7 +516,7 @@ repository:
 			match: "^\\s*(bevel)\\s+(on|off)(?=\\s|$|#)"
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
-				2: name: "constant.language.$2.wavefront.obj"
+				2: name: "constant.language.boolean.$2.wavefront.obj"
 		},{
 			
 			# c_interp: Colour interpolation
@@ -524,7 +524,7 @@ repository:
 			match: "^\\s*(c_interp)\\s+(on|off)(?=\\s|$|#)"
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
-				2: name: "constant.language.$2.wavefront.obj"
+				2: name: "constant.language.boolean.$2.wavefront.obj"
 		},{
 			
 			# d_interp: Dissolve interpolation
@@ -532,7 +532,7 @@ repository:
 			match: "^\\s*(d_interp)\\s+(on|off)(?=\\s|$|#)"
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
-				2: name: "constant.language.$2.wavefront.obj"
+				2: name: "constant.language.boolean.$2.wavefront.obj"
 		},{
 			
 			# lod: Level of detail
@@ -563,7 +563,7 @@ repository:
 			match: "^\\s*(usemap)\\s+(?:(off)|(?!#)(\\S+)(?<!#))"
 			captures:
 				1: name: "keyword.function.$1.wavefront.obj"
-				2: name: "constant.language.off.wavefront.obj"
+				2: name: "constant.language.boolean.off.wavefront.obj"
 				3: name: "variable.parameter.map-name.wavefront.obj"
 		},{
 		
