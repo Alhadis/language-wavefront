@@ -16,7 +16,14 @@ Kd spectral file.rfl 3
 Kd xyz 1
 Kd xyz 1 2 3
 
+Ks 0.0000
 Ks 0.0000 0.0000 0.0000
+Ks spectral file.rfl
+Ks spectral file.rfl 0.5
+Ks xyz 2
+Ks xyz 1 2 3
+
+
 Tf 0.9885 0.9885 0.9885
 illum 6
 d -halo 0.6600
