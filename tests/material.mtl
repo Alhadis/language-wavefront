@@ -23,6 +23,13 @@ Ks spectral file.rfl 0.5
 Ks xyz 2
 Ks xyz 1 2 3
 
+Ke 0.0000
+Ke 0.0000 0.0000 0.0000
+Ke spectral file.rfl
+Ke spectral file.rfl 0.5
+Ke xyz 2
+Ke xyz 1 2 3
+
 Tf 2
 Tf 0.1086 0.1086 0.1086
 Tf spectral file.rfl
@@ -42,6 +49,7 @@ Ni 1.19713
 map_Ka -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
 map_Kd -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
 map_Ks -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
+map_Ke -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
 map_Ns -s 1 1 1 -o 0 0 0 -mm 0 1 wisp.mps
 map_d -s 1 1 1 -o 0 0 0 -mm 0 1 wisp.mps
 map_aat on

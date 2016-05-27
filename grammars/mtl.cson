@@ -67,6 +67,7 @@ repository:
 			{include: "#ka"}
 			{include: "#kd"}
 			{include: "#ks"}
+			{include: "#ke"}
 			{include: "#tf"}
 			{include: "#illum"}
 			{include: "#d"}
@@ -176,6 +177,42 @@ repository:
 			# Ks [r g b]: RGB values
 			name: "meta.diffuse-reflectivity.rgb.wavefront.mtl"
 			match: "^\\s*(Ks)\\s+([-\\d.]+)(?:\\s+([-\\d.]+)\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.function.$1.wavefront.mtl"
+				2: name: "entity.value.red.wavefront.mtl",   patterns: [include: "#number"]
+				3: name: "entity.value.green.wavefront.mtl", patterns: [include: "#number"]
+				4: name: "entity.value.blue.wavefront.mtl",  patterns: [include: "#number"]
+		}]
+
+	
+	# Emissive colour
+	ke:
+		patterns: [{
+			
+			# Ke spectral [file.rfl factor]: Spectral curve
+			name: "meta.emissive-colour.spectral-curve.wavefront.mtl"
+			match: "^\\s*(Ke)\\s+(spectral)\\s+(?!#)(\\S+)(?<!#)(?:\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.function.$1.wavefront.mtl"
+				2: name: "storage.modifier.$2.wavefront.mtl"
+				3: name: "string.filename.wavefront.mtl"
+				4: name: "entity.value.factor.wavefront.mtl", patterns: [include: "#number"]
+		},{
+			
+			# Ke xyz [x y z]: CIEXYZ values
+			name: "meta.emissive-colour.ciexyz.wavefront.mtl"
+			match: "^\\s*(Ke)\\s+(xyz)\\s+([-\\d.]+)(?:\\s+([-\\d.]+)\\s+([-\\d.]+))?"
+			captures:
+				1: name: "keyword.function.$1.wavefront.mtl"
+				2: name: "storage.modifier.$2.wavefront.mtl"
+				3: name: "entity.value.red.wavefront.mtl",   patterns: [include: "#number"]
+				4: name: "entity.value.green.wavefront.mtl", patterns: [include: "#number"]
+				5: name: "entity.value.blue.wavefront.mtl",  patterns: [include: "#number"]
+		},{
+			
+			# Ke [r g b]: RGB values
+			name: "meta.emissive-colour.rgb.wavefront.mtl"
+			match: "^\\s*(Ke)\\s+([-\\d.]+)(?:\\s+([-\\d.]+)\\s+([-\\d.]+))?"
 			captures:
 				1: name: "keyword.function.$1.wavefront.mtl"
 				2: name: "entity.value.red.wavefront.mtl",   patterns: [include: "#number"]
@@ -295,6 +332,16 @@ repository:
 			# map_Ks [-options args filename]: Specular reflectivity
 			name: "meta.texture-map.specular-reflectivity.wavefront.mtl"
 			begin: "^\\s*(map_Ks)(?=\\s|$|#)"
+			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+			endCaptures:   1: name: "string.filename.wavefront.mtl"
+		},{
+			
+			# map_Ke [-options args filename]: Emissive colour
+			name: "meta.texture-map.emissive-colour.wavefront.mtl"
+			begin: "^\\s*(map_Ke)(?=\\s|$|#)"
 			end:   "(?=#)|(?:(\\S+)(?<!#))?\\s*(?=$|#)"
 			contentName: "meta.options.wavefront.mtl"
 			patterns: [include: "#texture-options"]
