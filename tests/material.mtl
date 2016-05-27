@@ -37,6 +37,7 @@ Tf spectral file.rfl 3
 Tf xyz 1
 Tf xyz 1 2 3
 
+Tr 0.0000
 Tf 0.9885 0.9885 0.9885
 illum 6
 d -halo 0.6600
