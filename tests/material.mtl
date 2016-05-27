@@ -62,6 +62,18 @@ bump -s 1 1 1 -o 0 0 0 -bm 1 sand.mpb
 refl -type sphere -mm 0 1 clouds.mpc
 
 
+# Texture map statements (Flipped)
+map_Ka chrome.mpc -s 1 1 1 -o 0 0 0 -mm 0 1
+map_Kd chrome.mpc -s 1 1 1 -o 0 0 0 -mm 0 1
+map_Ks chrome.mpc -s 1 1 1 -o 0 0 0 -mm 0 1
+map_Ke chrome.mpc -s 1 1 1 -o 0 0 0 -mm 0 1
+map_Ns wisp.mps -s 1 1 1 -o 0 0 0 -mm 0 1
+map_d wisp.mps -s 1 1 1 -o 0 0 0 -mm 0 1
+disp wisp.mps -s 1 1 .5
+decal sand.mps -s 1 1 1 -o 0 0 0 -mm 0 1
+bump sand.mpb -s 1 1 1 -o 0 0 0 -bm 1
+
+
 # Flat green
 newmtl flat_green
 Ka 0.0000 1.0000 0.0000
