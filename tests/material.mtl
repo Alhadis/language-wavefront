@@ -61,6 +61,10 @@ bump -s 1 1 1 -o 0 0 0 -bm 1 sand.mpb
 # Reflection map statement
 refl -type sphere -mm 0 1 clouds.mpc
 
+# Other map statements (3DS Max)
+map_bump path/to/file
+map_refl path/to/file
+
 
 # Texture map statements (Flipped)
 map_Ka chrome.mpc -s 1 1 1 -o 0 0 0 -mm 0 1

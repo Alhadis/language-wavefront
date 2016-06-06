@@ -406,6 +406,15 @@ repository:
 			contentName: "meta.options.wavefront.mtl"
 			patterns: [include: "#texture-options"]
 			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
+		},{
+			
+			# map_* [-options args filename]: Non-standard/unrecognised maps
+			name: "meta.texture-map.other.$2.wavefront.mtl"
+			begin: "^\\s*(map_([-\\w]+))(?=\\s|$|#)"
+			end:   "(?=$|#)"
+			contentName: "meta.options.wavefront.mtl"
+			patterns: [include: "#texture-options"]
+			beginCaptures: 1: name: "keyword.function.$1.wavefront.mtl"
 		}]
 
 
