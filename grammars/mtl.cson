@@ -1,8 +1,7 @@
 name: "Wavefront Material"
 scopeName: "source.wavefront.mtl"
 fileTypes: ["mtl"]
-patterns: [{ include: "#main" }]
-
+patterns: [include: "#main"]
 
 repository:
 	

@@ -1,8 +1,7 @@
 name: "Wavefront Object"
 scopeName: "source.wavefront.obj"
 fileTypes: ["obj"]
-patterns: [{ include: "#main" }]
-
+patterns: [include: "#main"]
 
 repository:
 	
