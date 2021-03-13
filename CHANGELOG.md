@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org).
 [Staged]
 ------------------------------------------------------------------------
 * Added modeline recognition
+* Optimised package size by excluding unneeded files from distribution
 
 
 [v1.0.1]
