@@ -1,6 +1,22 @@
 name: "Wavefront Object"
 scopeName: "source.wavefront.obj"
 fileTypes: ["obj"]
+firstLineMatch: """(?x)
+
+	# Emacs modeline (https://github.com/abend/wavefront-obj-mode)
+	-\\*-(?i:[ \\t]*(?=[^:;\\s]+[ \\t]*-\\*-)|(?:.*?[ \\t;]|(?<=-\\*-))[ \\t]*mode[ \\t]*:[ \\t]*)
+		(?i:wavefront-obj)
+	(?=[ \\t;]|(?<![-*])-\\*-).*?-\\*-
+	
+	|
+		
+	# Vim modeline (https://github.com/vim-scripts/Wavefronts-obj)
+	(?:(?:^|[ \\t])(?:vi|Vi(?=m))(?:m[<=>]?[0-9]+|m)?|[ \\t]ex)(?=:(?=[ \\t]*set?[ \\t][^\\r\\n:]+:)|:(?![ \\t]*set?[ \\t]))
+	(?:(?:[ \\t]*:[ \\t]*|[ \\t])\\w*(?:[ \\t]*=(?:[^\\\\\\s]|\\\\.)*)?)*[ \\t:]
+	(?:filetype|ft|syntax)[ \\t]*=
+		(?i:obj)
+	(?=$|\\s|:)
+"""
 patterns: [include: "#main"]
 
 repository:
