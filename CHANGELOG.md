@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org).
 ------------------------------------------------------------------------
 * Added modeline recognition
 * Optimised package size by excluding unneeded files from distribution
+* Renamed package files to use filenames consistent with other projects
 
 
 [v1.0.1]

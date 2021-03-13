@@ -2,5 +2,5 @@
 *.cson  linguist-detectable=true
 
 # Exclude unnecessary files from distribution
-specs/* export-ignore
+docs/*  export-ignore
 tests/* export-ignore

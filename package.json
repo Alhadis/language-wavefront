@@ -4,6 +4,7 @@
 	"description": "Syntax highlighting for Wavefront OBJ/MTL files",
 	"keywords": ["Wavefront", "OBJ", "MTL", "Object", "Material", "Texture", "Map", "3D", "Mesh", "Polygon", "Geometry"],
 	"repository": "https://github.com/Alhadis/language-wavefront",
+	"homepage": "https://www.loc.gov/preservation/digital/formats/fdd/fdd000507.shtml",
 	"license": "ISC",
 	"engines": {
 		"atom": "*"
