@@ -27,3 +27,10 @@ node_modules
 components
 npm-debug.log
 .apl.history
+
+
+## Archived tarballs
+*.tar.gz
+*.tar
+*.tgz
+*.zip
